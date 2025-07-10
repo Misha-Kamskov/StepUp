@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation(project(":core:common-android"))
+    implementation(project(":core:theme"))
 
     //Temporary
     implementation(project(":feature:init:presentation"))

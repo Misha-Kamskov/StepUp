@@ -24,6 +24,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,10 +44,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mkam.presentation.R
 import com.mkam.presentation.onboard.components.OnBoardCard
-import com.mkam.theme.ui.DarkShape
-import com.mkam.theme.ui.LightFrame
-import com.mkam.theme.ui.PrimaryBlue
-import com.mkam.theme.ui.StepUpTheme
+import com.mkam.theme.components.theme.PrimaryBlue
+import com.mkam.theme.components.theme.Shape10
+import com.mkam.theme.components.theme.StepUpTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -61,7 +61,7 @@ fun OnBoardContent() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(LightFrame)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         DrawDecorativeCanvas(modifier = Modifier.align(Alignment.TopEnd))
 
@@ -72,7 +72,9 @@ fun OnBoardContent() {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Spacer(modifier = Modifier.weight(1f))
+
             PagerSection(pagerState = pagerState)
+
             BottomSection(pagerState = pagerState)
         }
     }
@@ -96,7 +98,7 @@ fun DrawDecorativeCanvas(modifier: Modifier = Modifier) {
                 addOval(Rect(center, inner))
                 fillType = PathFillType.EvenOdd
             },
-            color = DarkShape
+            color = Shape10
         )
     }
 }
@@ -110,7 +112,7 @@ fun PagerSection(pagerState: PagerState) {
         OnBoardCard(
             imageId = R.drawable.logo_splash,
             title = "Follow Latest\nStyle Shoes $page",
-            subTitle = "There Are Many Beautiful\nAnd Attractive Plants To Your Room"
+            subTitle = "There Are Many Beautiful And\nAttractive Plants To Your Room"
         )
     }
 }
@@ -141,10 +143,8 @@ fun BottomSection(pagerState: PagerState) {
         ) {
             Text(
                 text = "Next",
-                fontSize = 18.sp,
-                lineHeight = 22.sp,
+                style = MaterialTheme.typography.labelLarge,
                 color = Color.White,
-                fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
             )
         }
     }
@@ -176,7 +176,7 @@ fun PageIndicators(pagerState: PagerState) {
 @Preview(showBackground = true)
 @Composable
 fun OnBoardPreview() {
-    StepUpTheme {
+    StepUpTheme(darkTheme = true) {
         OnBoardContent()
     }
 }

@@ -5,34 +5,37 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mkam.presentation.ui.AuthButton
 import com.mkam.presentation.ui.AuthGoogleButton
 import com.mkam.presentation.ui.AuthHeaderSection
 import com.mkam.presentation.ui.AuthSingInProposition
-import com.mkam.presentation.ui.BackButton
 import com.mkam.presentation.ui.EmailSection
 import com.mkam.presentation.ui.NameSection
 import com.mkam.presentation.ui.PasswordSection
-import com.mkam.theme.ui.LightFrame
+import com.mkam.presentation.ui.recovery.RecoveryContent
+import com.mkam.theme.components.theme.StepUpTheme
+import com.mkam.theme.components.view.BackButton
+import com.mkam.theme.components.view.PrimaryButton
 
 @Composable
 fun SingUpScreen() {
-    SingInContent()
+    SingUpContent()
 }
 
 @Composable
-fun SingInContent() {
+fun SingUpContent() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(LightFrame)
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 20.dp)
     ) {
         Column(
@@ -64,7 +67,7 @@ fun SingInContent() {
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            AuthButton(title = "Sing Up", onClick = {})
+            PrimaryButton(modifier = Modifier.fillMaxWidth(), title = "Sing Up", onClick = {})
 
             Spacer(modifier = Modifier.height(30.dp))
 
@@ -82,5 +85,7 @@ fun SingInContent() {
 @Preview(showBackground = true)
 @Composable
 fun SingInPreview() {
-    SingInContent()
+    StepUpTheme(darkTheme = true) {
+        SingUpContent()
+    }
 }

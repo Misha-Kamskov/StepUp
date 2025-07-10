@@ -9,14 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -30,7 +29,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -39,39 +37,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mkam.presentation.R
-import com.mkam.theme.ui.DarkThemeSubText
-import com.mkam.theme.ui.LightShape
-import com.mkam.theme.ui.LightThemeSubText
-import com.mkam.theme.ui.LightThemeText
-import com.mkam.theme.ui.PrimaryBlue
 import kotlinx.coroutines.launch
 
-@Composable
-fun BackButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
-    IconButton(
-        modifier = modifier
-            .size(44.dp)
-            .clip(CircleShape),
-        colors = IconButtonDefaults.iconButtonColors(
-            containerColor = LightShape
-        ),
-        onClick = onClick
-    ) {
-        Icon(
-            painter = painterResource(R.drawable.arrow_left),
-            tint = LightThemeText, contentDescription = null
-        )
-    }
-}
 
 @Composable
 fun AuthHeaderSection(modifier: Modifier = Modifier, title: String, subTitle: String) {
@@ -82,38 +56,15 @@ fun AuthHeaderSection(modifier: Modifier = Modifier, title: String, subTitle: St
     ) {
         Text(
             text = title,
-            fontSize = 28.sp,
-            lineHeight = TextUnit(36f, TextUnitType.Sp),
-            color = LightThemeText,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
-            fontWeight = FontWeight.Medium
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary,
         )
 
         Text(
             text = subTitle,
-            fontSize = 16.sp,
-            lineHeight = TextUnit(24f, TextUnitType.Sp),
-            color = LightThemeSubText,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),
-        )
-    }
-}
-
-@Composable
-fun AuthButton(modifier: Modifier = Modifier, title: String, onClick: () -> Unit) {
-    Button(
-        modifier = modifier
-            .height(54.dp)
-            .fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(containerColor = PrimaryBlue),
-        onClick = onClick
-    ) {
-        Text(
-            text = title,
-            fontSize = 18.sp,
-            lineHeight = 22.sp,
-            color = Color.White,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+            style = MaterialTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onPrimary,
         )
     }
 }
@@ -124,10 +75,9 @@ fun AuthGoogleButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         modifier = modifier
             .height(54.dp)
             .fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onBackground),
         onClick = onClick
     ) {
-
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -140,10 +90,8 @@ fun AuthGoogleButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
 
             Text(
                 text = "Sign in with google",
-                fontSize = 18.sp,
-                lineHeight = 22.sp,
-                color = LightThemeText,
-                fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -158,17 +106,13 @@ fun AuthSingUpProposition(modifier: Modifier = Modifier, onClick: () -> Unit) {
         ) {
             Text(
                 text = "Don’t have an account?",
-                fontSize = 12.sp,
-                lineHeight = 16.sp,
-                color = DarkThemeSubText,
-                fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onPrimary,
             )
             Text(
                 text = "Sign Up for free",
-                fontSize = 12.sp,
-                lineHeight = 16.sp,
-                color = LightThemeText,
-                fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -183,17 +127,13 @@ fun AuthSingInProposition(modifier: Modifier = Modifier, onClick: () -> Unit) {
         ) {
             Text(
                 text = "Already have an account?",
-                fontSize = 12.sp,
-                lineHeight = 16.sp,
-                color = DarkThemeSubText,
-                fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onPrimary,
             )
             Text(
                 text = "Sign in",
-                fontSize = 12.sp,
-                lineHeight = 16.sp,
-                color = LightThemeText,
-                fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -204,25 +144,20 @@ fun RecoveryPasswordProposition(modifier: Modifier = Modifier, onClick: () -> Un
     TextButton(modifier = modifier, onClick = onClick) {
         Text(
             text = "Recovery Password",
-            fontSize = 12.sp,
-            lineHeight = 16.sp,
-            color = DarkThemeSubText,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onPrimary,
         )
     }
 }
 
 
 @Composable
-fun NameSection(modifier: Modifier = Modifier) {
+fun NameSection() {
     Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             text = "Your Name",
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
-            color = LightThemeText,
-            fontWeight = FontWeight.Medium,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
         )
 
         val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -237,9 +172,9 @@ fun NameSection(modifier: Modifier = Modifier) {
             isError = false,
             shape = RoundedCornerShape(50.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                errorContainerColor = Color.White,
+                focusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                errorContainerColor = MaterialTheme.colorScheme.onBackground,
                 cursorColor = Color(0xFFCCCCCC),
                 errorBorderColor = Color(0xFFDB0F4E),
                 focusedBorderColor = Color.Transparent,
@@ -261,6 +196,7 @@ fun NameSection(modifier: Modifier = Modifier) {
                     }
                 },
             textStyle = TextStyle(
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 14.sp,
                 lineHeight = 16.sp,
                 fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),
@@ -271,15 +207,12 @@ fun NameSection(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun EmailSection(modifier: Modifier = Modifier) {
+fun EmailSection() {
     Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             text = "Email Address",
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
-            color = LightThemeText,
-            fontWeight = FontWeight.Medium,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
         )
 
         val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -294,9 +227,9 @@ fun EmailSection(modifier: Modifier = Modifier) {
             isError = false,
             shape = RoundedCornerShape(50.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                errorContainerColor = Color.White,
+                focusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                errorContainerColor = MaterialTheme.colorScheme.onBackground,
                 cursorColor = Color(0xFFCCCCCC),
                 errorBorderColor = Color(0xFFDB0F4E),
                 focusedBorderColor = Color.Transparent,
@@ -318,6 +251,7 @@ fun EmailSection(modifier: Modifier = Modifier) {
                     }
                 },
             textStyle = TextStyle(
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 14.sp,
                 lineHeight = 16.sp,
                 fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),
@@ -328,15 +262,12 @@ fun EmailSection(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun PasswordSection(modifier: Modifier = Modifier) {
+fun PasswordSection() {
     Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
             text = "Password",
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
-            color = LightThemeText,
-            fontWeight = FontWeight.Medium,
-            fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_medium)),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
         )
 
         val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -352,9 +283,9 @@ fun PasswordSection(modifier: Modifier = Modifier) {
             isError = false,
             shape = RoundedCornerShape(50.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                errorContainerColor = Color.White,
+                focusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                errorContainerColor = MaterialTheme.colorScheme.onBackground,
                 cursorColor = Color(0xFFCCCCCC),
                 errorBorderColor = Color(0xFFDB0F4E),
                 focusedBorderColor = Color.Transparent,
@@ -374,7 +305,11 @@ fun PasswordSection(modifier: Modifier = Modifier) {
                 IconButton(
                     modifier = Modifier.size(24.dp),
                     onClick = { passwordVisible = !passwordVisible }) {
-                    Icon(painter = painterResource(image), description)
+                    Icon(
+                        tint = MaterialTheme.colorScheme.primary,
+                        painter = painterResource(image),
+                        contentDescription = description
+                    )
                 }
             },
             modifier = Modifier
@@ -390,6 +325,7 @@ fun PasswordSection(modifier: Modifier = Modifier) {
                     }
                 },
             textStyle = TextStyle(
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 14.sp,
                 lineHeight = 16.sp,
                 fontFamily = FontFamily(Font(com.mkam.theme.R.font.airbnb_cereal_app_book)),

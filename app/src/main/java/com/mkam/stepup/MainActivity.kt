@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.mkam.stepup.ui.theme.StepUpTheme
+import com.mkam.presentation.ui.singin.SingInScreen
+import com.mkam.theme.components.theme.StepUpTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StepUpTheme {
-
+                SingInScreen()
             }
         }
     }
