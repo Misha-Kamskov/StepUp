@@ -28,6 +28,9 @@
             <option value="$PROJECT_DIR$/feature/init" />
             <option value="$PROJECT_DIR$/feature/init/domain" />
             <option value="$PROJECT_DIR$/feature/init/presentation" />
+            <option value="$PROJECT_DIR$/feature/notification" />
+            <option value="$PROJECT_DIR$/feature/notification/domain" />
+            <option value="$PROJECT_DIR$/feature/notification/presentation" />
             <option value="$PROJECT_DIR$/feature/profile" />
             <option value="$PROJECT_DIR$/feature/profile/domain" />
             <option value="$PROJECT_DIR$/feature/profile/presentation" />
