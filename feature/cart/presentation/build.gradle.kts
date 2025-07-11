@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    api(project(":feature:auth:domain"))
+    api(project(":feature:cart:domain"))
     implementation(project(":core:essentials"))
     implementation(project(":core:theme"))
 

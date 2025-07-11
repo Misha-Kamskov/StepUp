@@ -52,6 +52,7 @@ dependencies {
     //Temporary
     implementation(project(":feature:init:presentation"))
     implementation(project(":feature:auth:presentation"))
+    implementation(project(":feature:cart:presentation"))
 
     //Hilt
     implementation(libs.hilt.android)
