@@ -185,7 +185,7 @@ fun CartItemCard(
                     modifier = Modifier
                         .size(18.dp)
                         .clickable { onDelete() },
-                    painter = painterResource(R.drawable.icon_bin),
+                    painter = painterResource(com.mkam.theme.R.drawable.icon_bin),
                     contentDescription = null,
                     tint = Color(0xFFF87265)
                 )

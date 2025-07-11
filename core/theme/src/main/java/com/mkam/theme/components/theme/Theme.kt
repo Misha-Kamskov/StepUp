@@ -11,7 +11,8 @@ private val CustomDarkColorScheme = darkColorScheme(
     onPrimary = SubText50,
     secondary = PrimaryBlue,
     background = Frame15,
-    onBackground = Shape10
+    onBackground = Shape10,
+    tertiary = Shape10
 )
 
 
@@ -20,7 +21,8 @@ private val CustomLightColorScheme = lightColorScheme(
     onPrimary = SubText50,
     secondary = PrimaryBlue,
     background = Frame95,
-    onBackground = Shape100
+    onBackground = Shape100,
+    tertiary = Tertiary10
 )
 
 

@@ -10,6 +10,7 @@ val SubText50 = Color(0xFF707B81)
 val Shape100 = Color(0xFFFFFFFF)
 val Frame95 = Color(0xFFF8F9FA)
 val Text10 = Color(0xFF1A2530)
+val Tertiary10 = Color(0xFFE4E4E4)
 
 //Dark
 val Shape10 = Color(0xFF161F28)

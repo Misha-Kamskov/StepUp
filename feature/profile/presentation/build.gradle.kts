@@ -1,24 +1,21 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-
     alias(libs.plugins.koltin.ksp)
     alias(libs.plugins.hilt.android)
+
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.mkam.stepup"
+    namespace = "com.mkam.presentation"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.mkam.stepup"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -37,42 +34,33 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures {
+    buildFeatures{
         compose = true
-    }
-    hilt {
-        enableAggregatingTask = false
     }
 }
 
 dependencies {
-    implementation(project(":core:common-android"))
+
+    api(project(":feature:profile:domain"))
+    implementation(project(":core:essentials"))
     implementation(project(":core:theme"))
 
-    //Temporary
-    implementation(project(":feature:init:presentation"))
-    implementation(project(":feature:auth:presentation"))
-    implementation(project(":feature:cart:presentation"))
-    implementation(project(":feature:profile:presentation"))
-
-    //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

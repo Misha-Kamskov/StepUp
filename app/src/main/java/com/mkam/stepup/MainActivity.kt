@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.mkam.presentation.CartScreen
+import com.mkam.presentation.SettingsScreen
 import com.mkam.presentation.ui.singin.SingInScreen
 import com.mkam.theme.components.theme.StepUpTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StepUpTheme {
-                CartScreen()
+                SettingsScreen()
             }
         }
     }
