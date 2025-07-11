@@ -10,20 +10,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mkam.presentation.ui.AuthGoogleButton
 import com.mkam.presentation.ui.AuthHeaderSection
-import com.mkam.presentation.ui.AuthSingInProposition
-import com.mkam.presentation.ui.EmailSection
-import com.mkam.presentation.ui.NameSection
-import com.mkam.presentation.ui.PasswordSection
-import com.mkam.presentation.ui.recovery.RecoveryContent
+import com.mkam.presentation.ui.AuthProposition
 import com.mkam.theme.components.theme.StepUpTheme
-import com.mkam.theme.components.view.BackButton
+import com.mkam.theme.components.view.InputSection
 import com.mkam.theme.components.view.PrimaryButton
+import com.mkam.theme.components.view.UniversalHeader
 
 @Composable
 fun SingUpScreen() {
@@ -43,7 +45,7 @@ fun SingUpContent() {
                 .fillMaxSize()
                 .padding(bottom = 70.dp)
         ) {
-            BackButton(modifier = Modifier.padding(top = 52.dp)) {}
+            UniversalHeader(modifier = Modifier.padding(top = 52.dp), onBackClick = { })
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -55,15 +57,32 @@ fun SingUpContent() {
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            NameSection()
+            var name by rememberSaveable { mutableStateOf("") }
+            InputSection(
+                label = "Your Name",
+                value = name,
+                onValueChange = { name = it }
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            EmailSection()
+            var email by rememberSaveable { mutableStateOf("") }
+            InputSection(
+                label = "Email Address",
+                value = email,
+                onValueChange = { email = it },
+                keyboardType = KeyboardType.Email
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            PasswordSection()
+            var password by rememberSaveable { mutableStateOf("") }
+            InputSection(
+                label = "Password",
+                value = password,
+                onValueChange = { password = it },
+                isPassword = true
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 
@@ -74,17 +93,29 @@ fun SingUpContent() {
             AuthGoogleButton(onClick = {})
         }
 
-        AuthSingInProposition(
+        AuthProposition(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 50.dp)
-        ) { }
+                .padding(bottom = 50.dp),
+            onClick = { /* Navigate to sign in */ },
+            primaryText = "Already have an account?",
+            secondaryText = "Sign in"
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun SingInPreviewLight() {
+    StepUpTheme(darkTheme = false) {
+        SingUpContent()
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SingInPreview() {
+fun SingInPreviewDark() {
     StepUpTheme(darkTheme = true) {
         SingUpContent()
     }

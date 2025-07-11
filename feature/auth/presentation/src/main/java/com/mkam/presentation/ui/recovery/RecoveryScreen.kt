@@ -9,15 +9,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mkam.presentation.ui.AuthHeaderSection
-import com.mkam.presentation.ui.EmailSection
 import com.mkam.theme.components.theme.StepUpTheme
-import com.mkam.theme.components.view.BackButton
+import com.mkam.theme.components.view.InputSection
 import com.mkam.theme.components.view.PrimaryButton
+import com.mkam.theme.components.view.UniversalHeader
 
 @Composable
 fun RecoveryScreen() {
@@ -32,7 +37,7 @@ fun RecoveryContent() {
             .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 20.dp)
     ) {
-        BackButton(modifier = Modifier.padding(top = 52.dp)) {}
+        UniversalHeader(modifier = Modifier.padding(top = 52.dp), onBackClick = { })
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -44,7 +49,13 @@ fun RecoveryContent() {
 
         Spacer(modifier = Modifier.height(50.dp))
 
-        EmailSection()
+        var email by rememberSaveable { mutableStateOf("") }
+        InputSection(
+            label = "Email Address",
+            value = email,
+            onValueChange = { email = it },
+            keyboardType = KeyboardType.Email
+        )
 
         Spacer(modifier = Modifier.height(40.dp))
 
@@ -54,7 +65,15 @@ fun RecoveryContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun RecoveryPreview() {
+fun RecoveryPreviewLight() {
+    StepUpTheme(darkTheme = false) {
+        RecoveryContent()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RecoveryPreviewDark() {
     StepUpTheme(darkTheme = true) {
         RecoveryContent()
     }

@@ -22,10 +22,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,16 +34,14 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathFillType
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.mkam.presentation.R
 import com.mkam.presentation.onboard.components.OnBoardCard
 import com.mkam.theme.components.theme.PrimaryBlue
 import com.mkam.theme.components.theme.Shape10
 import com.mkam.theme.components.theme.StepUpTheme
+import com.mkam.theme.components.view.PrimaryButton
 import kotlinx.coroutines.launch
 
 @Composable
@@ -128,24 +123,16 @@ fun BottomSection(pagerState: PagerState) {
     ) {
         PageIndicators(pagerState)
 
-        Button(
-            modifier = Modifier.height(54.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = PrimaryBlue),
-            onClick = {
-                if (pagerState.currentPage == pagerState.pageCount - 1) {
-                    // Navigate to Auth Screen
-                } else {
-                    scope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                    }
+        PrimaryButton(modifier = Modifier, title = "Next") {
+
+            if (pagerState.currentPage == pagerState.pageCount - 1) {
+                // Navigate to Auth Screen
+            } else {
+                scope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
                 }
             }
-        ) {
-            Text(
-                text = "Next",
-                style = MaterialTheme.typography.labelLarge,
-                color = Color.White,
-            )
+
         }
     }
 }
@@ -175,7 +162,15 @@ fun PageIndicators(pagerState: PagerState) {
 
 @Preview(showBackground = true)
 @Composable
-fun OnBoardPreview() {
+fun OnBoardPreviewLight() {
+    StepUpTheme(darkTheme = false) {
+        OnBoardContent()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OnBoardPreviewDark() {
     StepUpTheme(darkTheme = true) {
         OnBoardContent()
     }
